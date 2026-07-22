@@ -1,0 +1,15 @@
+{
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "mcp__kagelot__direct_clip",
+      "mcp__kagelot__write_screenplay",
+      "mcp__kagelot__generate_image",
+      "mcp__kagelot__generate_video",
+      "mcp__kagelot__list_styles",
+      "Read",
+      "Write",
+      "Edit"
+    ]
+  }
+}

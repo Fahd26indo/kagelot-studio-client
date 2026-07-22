@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kagelot": {
+      "type": "http",
+      "url": "https://kagelot.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${KAGELOT_API_KEY}"
+      }
+    }
+  }
+}

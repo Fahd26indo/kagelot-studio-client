@@ -1,0 +1,22 @@
+# Secrets — never commit
+.env
+.env.local
+*.key
+
+# Generated media (KAGELOT hosts these on its CDN; keep the repo light)
+*.mp4
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.webp
+!**/README*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Claude Code local state
+.claude/settings.local.json
