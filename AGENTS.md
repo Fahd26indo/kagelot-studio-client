@@ -24,6 +24,7 @@ This project ships a `.mcp.json` connecting the agent to the KAGELOT MCP server.
 |---|---|---|
 | `mcp__kagelot__direct_clip` | Turn plain-language clip direction into a full prompt package (direction + camera + image prompts + Seedance prompt) | markdown prompt text |
 | `mcp__kagelot__write_screenplay` | Draft a screenplay from a brief | markdown screenplay |
+| `mcp__kagelot__music_brief` | Read the film's mood/story and produce a Suno/Udio score brief matched to it (style, instruments, BPM, key, structure) | markdown score brief |
 | `mcp__kagelot__list_styles` | List available visual styles (names only) | style list |
 
 **No generators.** There is deliberately no `generate_image` / `generate_video` tool. KAGELOT's product is the **prompts and knowledge**, not the media. Everything it returns is text saved as markdown.
@@ -39,7 +40,8 @@ This project ships a `.mcp.json` connecting the agent to the KAGELOT MCP server.
 3. **Direct clip-by-clip** — describe the clip in plain words → `mcp__kagelot__direct_clip` → save to `clips/CLIP-NN-*/CLIP-NN-prompts.md`.
 4. **Generate — the director, in their own tools** — copy the image prompts into Midjourney/Nanobanana/Flow, the Seedance prompt into Seedance. KAGELOT does not do this step.
 5. **Log results** — paste links/filenames of what was generated into `clips/CLIP-NN-*/CLIP-NN-results.md`.
-6. **Review & move on** — keep what works, re-direct if the prompt needs adjusting, then next clip.
+6. **Score (parallel, once the story is locked)** — `mcp__kagelot__music_brief` → save to `audio/score-brief.md`; the director runs it in Suno/Udio.
+7. **Review & move on** — keep what works, re-direct if the prompt needs adjusting, then next clip.
 
 **The assistant proposes prompts; the director generates and judges — always.**
 

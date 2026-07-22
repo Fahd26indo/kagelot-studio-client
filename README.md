@@ -13,6 +13,7 @@ KAGELOT plugs into Claude Code, Kimi, or any MCP-capable agent and turns plain-l
 - 🎬 **Seedance video prompts** — describe a clip, get a full multi-layer prompt: story direction, camera angles, and the paste-ready Seedance prompt, tuned the way a real director would build it.
 - 🎞️ **Storyboards & shot diagrams** — get the storyboard-grid and director's-blueprint prompts that lock composition and camera before you generate — the single biggest lever on render quality.
 - 🖼️ **Image-generator prompts** — first-frame and asset prompts for **Nanobanana, Midjourney, Google Flow, or any image model** you use, style-locked and character-consistent.
+- 🎵 **Music & score prompts** — reads the film's mood and story and returns a **Suno/Udio-ready score brief** (style, instruments, BPM, key, structure) matched to the scene — it understands what the film actually needs, not a generic "epic music" tag.
 - 📝 **Screenplays** — draft a screenplay from a one-line brief.
 
 All output is markdown you save into your project. You copy it into your generation tools and shoot.
