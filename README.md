@@ -1,65 +1,85 @@
 # KAGELOT — Studio Client 影
 
-**Your local command post for KAGELOT — the AI film studio you direct in plain language.**
+**An expert AI film-direction brain for your coding agent. It writes the prompts; you make the film.**
 
-You are the *Kage* (the shadow commander). This kit connects [Claude Code](https://claude.com/claude-code) to the **KAGELOT MCP server**, so you can direct films from your terminal: describe a clip in your own words, and KAGELOT hands you a finished **prompt package** — camera direction, image prompts, and the Seedance prompt — as a markdown file. You then run those prompts in your **own** tools (Seedance, Midjourney, Flow). KAGELOT does the thinking; you do the generating; you own the result.
+KAGELOT plugs into Claude Code, Kimi, or any MCP-capable agent and turns plain-language direction into **paste-ready prompts** — for Seedance video, for storyboards and shot diagrams, and for any image generator (Nanobanana, Midjourney, Google Flow). You describe the shot in your own words; KAGELOT hands back a finished prompt package as a markdown file. You run those prompts in your own tools. The studio's method stays on the KAGELOT server — you get its output, not its formulas.
 
----
-
-## What's in here
-
-An advanced Claude Code setup, ready to use:
-
-- **`CLAUDE.md`** — auto-loads every session: the workflow, the memory protocol, and the KAGELOT tools.
-- **`.claude/agents/kage-guide.md`** — an onboarding agent that checks your connection and walks you through setup.
-- **`.claude/commands/`** — `/direct` (direct a clip) and `/render` (render a clip).
-- **Memory system** — `MEMORY.md` + `memory/` for your standing preferences, plus a **`memory.md` inside every project** for that film's state.
-- **Project scaffold** — `projects/_TEMPLATE/` you copy for each new film.
-- **`.mcp.json`** — the KAGELOT MCP connection (your key stays in `.env`, never committed).
-
-KAGELOT returns **prompts, not renders.** You never see or store the studio's prompt-craft — you get finished prompt packages as markdown and generate them yourself.
+> **KAGELOT returns prompts, not renders.** No image or video generation runs here. That's the point: you get the directing and prompt-writing expertise, and you generate on your own compute, in your own accounts.
 
 ---
 
-## Setup (5 minutes)
+## What it's expert at
 
-**1. Install Claude Code** (if you haven't):
+- 🎬 **Seedance video prompts** — describe a clip, get a full multi-layer prompt: story direction, camera angles, and the paste-ready Seedance prompt, tuned the way a real director would build it.
+- 🎞️ **Storyboards & shot diagrams** — get the storyboard-grid and director's-blueprint prompts that lock composition and camera before you generate — the single biggest lever on render quality.
+- 🖼️ **Image-generator prompts** — first-frame and asset prompts for **Nanobanana, Midjourney, Google Flow, or any image model** you use, style-locked and character-consistent.
+- 📝 **Screenplays** — draft a screenplay from a one-line brief.
+
+All output is markdown you save into your project. You copy it into your generation tools and shoot.
+
+---
+
+## Works with any MCP agent
+
+KAGELOT is an [MCP](https://modelcontextprotocol.io) server, so it connects to whatever agent you already use:
+
+**Claude Code · Kimi · Cursor · Cline · Windsurf · Continue · Gemini CLI · Zed** — and more.
+
+Same server, same key. Only the config file differs per tool (below).
+
+---
+
+## Install
+
+### 1. Prerequisites
+- An MCP-capable agent (e.g. [Claude Code](https://claude.com/claude-code): `npm install -g @anthropic-ai/claude-code`).
+- Your **KAGELOT API key** — ask the KAGELOT team (it's tied to your account).
+
+### 2. Get the kit
 ```bash
-npm install -g @anthropic-ai/claude-code
+git clone https://github.com/Fahd26indo/kagelot-studio-client.git
+cd kagelot-studio-client
+cp .env.example .env       # then paste your key into KAGELOT_API_KEY
 ```
 
-**2. Get your KAGELOT key.** Ask the KAGELOT team for your API key (it's tied to your account + credit balance).
+### 3. Connect your agent to KAGELOT
 
-**3. Add your key:**
-```bash
-cp .env.example .env
-# open .env and paste your key into KAGELOT_API_KEY
-```
-
-**4. Open the project in Claude Code and start:**
+**Claude Code** — the included `.mcp.json` already wires it up. Just open the folder and approve the `kagelot` server:
 ```bash
 claude
 ```
-Then say: **"kage guide, get me started"** — the guide agent verifies the connection and takes it from there.
+Or add it explicitly:
+```bash
+claude mcp add --transport http kagelot https://kagelot.com/api/mcp \
+  --header "Authorization: Bearer $KAGELOT_API_KEY"
+```
+
+**Kimi** — add the same server in Kimi's MCP config (an HTTP MCP server), using the URL `https://kagelot.com/api/mcp` and header `Authorization: Bearer <your-key>`.
+
+**Any other MCP agent** — point it at `https://kagelot.com/api/mcp` with your key in the `Authorization: Bearer` header. Cursor uses `.cursor/mcp.json`, Cline/Windsurf each have their own MCP settings — the server details are identical.
+
+### 4. Start directing
+Open the project in your agent and say:
+> **"kage guide, get me started"**
+
+The built-in guide checks your connection and walks you through your first clip.
 
 ---
 
 ## The workflow
 
 ```
-concept → lock a style → direct clip-by-clip → KAGELOT returns a prompt .md → you generate it in your own tools → log results → next clip
+lock a style → direct a clip in plain words → KAGELOT returns a prompt .md → you generate it in your own tools → next clip
 ```
 
-You describe each clip in plain language. KAGELOT does the direction and prompt engineering and hands you a markdown file. You run those prompts in Seedance/Midjourney/Flow yourself, keep the takes you like, and note them in the clip's `-results.md`.
-
-Full details load automatically from `CLAUDE.md` when you open the project.
+Each film lives in `projects/<name>/`, with its own `memory.md` tracking style, progress, and next step. Full details load automatically from `CLAUDE.md` (Claude Code) / `AGENTS.md` (other agents) when you open the project.
 
 ---
 
 ## What stays private
 
-The studio's system prompts, direction method, and style formulas **live on the KAGELOT server and never touch this machine.** This kit only knows how to *ask* for prompt packages and where to save them. That's the deal: you get the studio's directing brain without holding its secrets — and you run generation on your own compute, in your own accounts.
+The studio's system prompts, direction method, and style formulas **live on the KAGELOT server and never touch your machine.** This kit only knows how to *ask* for prompt packages and where to save them. You get the directing brain; KAGELOT keeps its secrets; and every render runs on your own accounts.
 
 ---
 
-*KAGELOT — the shadow studio. Direct your film; the squad builds it.*
+*KAGELOT — the shadow studio. Direct in plain language; the squad writes the prompts.*
