@@ -2,7 +2,7 @@
 
 **Your local command post for KAGELOT — the AI film studio you direct in plain language.**
 
-You are the *Kage* (the shadow commander). This kit connects [Claude Code](https://claude.com/claude-code) to the **KAGELOT MCP server**, so you can direct films from your terminal: describe a clip in your own words, and KAGELOT turns it into cinematic prompts, generates the images, and renders the video — the craft runs on the server, you keep the taste.
+You are the *Kage* (the shadow commander). This kit connects [Claude Code](https://claude.com/claude-code) to the **KAGELOT MCP server**, so you can direct films from your terminal: describe a clip in your own words, and KAGELOT hands you a finished **prompt package** — camera direction, image prompts, and the Seedance prompt — as a markdown file. You then run those prompts in your **own** tools (Seedance, Midjourney, Flow). KAGELOT does the thinking; you do the generating; you own the result.
 
 ---
 
@@ -13,11 +13,11 @@ An advanced Claude Code setup, ready to use:
 - **`CLAUDE.md`** — auto-loads every session: the workflow, the memory protocol, and the KAGELOT tools.
 - **`.claude/agents/kage-guide.md`** — an onboarding agent that checks your connection and walks you through setup.
 - **`.claude/commands/`** — `/direct` (direct a clip) and `/render` (render a clip).
-- **Memory system** — `MEMORY.md` + `memory/` so the assistant remembers your preferences and project state across sessions.
+- **Memory system** — `MEMORY.md` + `memory/` for your standing preferences, plus a **`memory.md` inside every project** for that film's state.
 - **Project scaffold** — `projects/_TEMPLATE/` you copy for each new film.
 - **`.mcp.json`** — the KAGELOT MCP connection (your key stays in `.env`, never committed).
 
-You never see or store the studio's prompt-craft. You get finished outputs — prompts, images, videos.
+KAGELOT returns **prompts, not renders.** You never see or store the studio's prompt-craft — you get finished prompt packages as markdown and generate them yourself.
 
 ---
 
@@ -47,10 +47,10 @@ Then say: **"kage guide, get me started"** — the guide agent verifies the conn
 ## The workflow
 
 ```
-concept → lock a style → character stills → direct clip-by-clip → generate assets → render → approve → next clip
+concept → lock a style → direct clip-by-clip → KAGELOT returns a prompt .md → you generate it in your own tools → log results → next clip
 ```
 
-You describe each clip in plain language. KAGELOT does the prompt engineering and rendering. You judge the result and keep the takes you like.
+You describe each clip in plain language. KAGELOT does the direction and prompt engineering and hands you a markdown file. You run those prompts in Seedance/Midjourney/Flow yourself, keep the takes you like, and note them in the clip's `-results.md`.
 
 Full details load automatically from `CLAUDE.md` when you open the project.
 
@@ -58,7 +58,7 @@ Full details load automatically from `CLAUDE.md` when you open the project.
 
 ## What stays private
 
-The studio's system prompts, direction method, style formulas, and provider keys **live on the KAGELOT server and never touch this machine.** This kit only knows how to *ask* for outputs and where to save them. That's the deal: you get the studio's power without holding its secrets.
+The studio's system prompts, direction method, and style formulas **live on the KAGELOT server and never touch this machine.** This kit only knows how to *ask* for prompt packages and where to save them. That's the deal: you get the studio's directing brain without holding its secrets — and you run generation on your own compute, in your own accounts.
 
 ---
 

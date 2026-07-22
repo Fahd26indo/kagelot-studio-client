@@ -1,6 +1,6 @@
-# <FILM NAME> — session memory
+# <FILM NAME> — project memory
 
-*This film's state. Update it as you work so the next session picks up cleanly.*
+*This film's working memory. Update it as you work so the next session picks up cleanly.*
 
 ## Logline
 <one sentence — what this film is>
@@ -9,12 +9,12 @@
 <locked style name, once chosen via mcp__kagelot__list_styles>
 
 ## Characters
-<REF stills created, one line each>
+<your own reference stills, one line each — name + where the ref lives (you generate these in your own tools)>
 
 ## Progress
 - Next step: <e.g. "direct CLIP-03">
-- Clips done: <list>
-- Clips in progress: <list>
+- Clips directed: <list>
+- Clips generated & kept: <list>
 
 ## Notes / decisions
-<anything the director decided that affects future clips>
+<anything decided that affects future clips>
