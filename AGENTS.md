@@ -68,8 +68,7 @@ kagelot-studio-client/
 ├── CLAUDE.md             ← imports AGENTS.md (Claude Code)
 ├── MEMORY.md             ← director's standing preferences (index)
 ├── PROJECT_STRUCTURE.md  ← folder conventions
-├── .mcp.json             ← KAGELOT MCP connection (key via env)
-├── .env.example          ← copy to .env, add KAGELOT_API_KEY
+├── .mcp.json             ← KAGELOT MCP connection — ${KAGELOT_API_KEY} reads an OS env var ONLY (see README step 3; .env is NOT auto-loaded, .env.example is never read)
 ├── memory/               ← one director-preference per file
 └── projects/             ← films; copy _TEMPLATE/ to start one
     └── _TEMPLATE/

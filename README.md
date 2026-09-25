@@ -40,16 +40,35 @@ Same server, same key. Only the config file differs per tool (below).
 ```bash
 git clone https://github.com/Fahd26indo/kagelot-studio-client.git
 cd kagelot-studio-client
-cp .env.example .env       # then paste your key into KAGELOT_API_KEY
 ```
 
-### 3. Connect your agent to KAGELOT
+### 3. Add your key (the step everyone gets wrong)
 
-**Claude Code** — the included `.mcp.json` already wires it up. Just open the folder and approve the `kagelot` server:
+`.mcp.json` contains `"Authorization": "Bearer ${KAGELOT_API_KEY}"` — that `${...}` reads a **real OS environment variable**, nothing else. Two ways to make it resolve — pick ONE:
+
+**A. Simplest — paste the key into `.mcp.json` directly:**
+```json
+"Authorization": "Bearer kgl_your_real_key_here"
+```
+⚠️ After this, **never commit `.mcp.json`** — it now holds your secret.
+
+**B. Clean — set a real environment variable:**
+- **Windows (PowerShell):** `setx KAGELOT_API_KEY "kgl_your_real_key"` → must print `SUCCESS` → **close ALL terminal windows** (setx only affects windows opened after it runs).
+- **macOS/Linux:** add `export KAGELOT_API_KEY="kgl_your_real_key"` to `~/.zshrc` → open a new shell.
+
+**Do NOT:**
+- ❌ paste the key into `.env.example` — it's a template, **nothing ever reads it**.
+- ❌ rely on a `.env` file — most MCP agents (incl. Claude Code) do **not** auto-load `.env` for `.mcp.json` interpolation.
+- ❌ paste the key inside the braces (`${kgl_...}`) — that makes it look up a variable *named* your key, which doesn't exist.
+
+### 4. Connect your agent to KAGELOT
+
+**Claude Code** — the included `.mcp.json` already wires it up. **Restart the agent after adding your key** (MCP servers connect at startup only), then approve the `kagelot` server when prompted:
 ```bash
 claude
 ```
-Or add it explicitly:
+Verify with `/mcp` — `kagelot` should show **connected**.
+Or add it explicitly (uses your OS env var):
 ```bash
 claude mcp add --transport http kagelot https://kagelot.com/api/mcp \
   --header "Authorization: Bearer $KAGELOT_API_KEY"
@@ -59,7 +78,7 @@ claude mcp add --transport http kagelot https://kagelot.com/api/mcp \
 
 **Any other MCP agent** — point it at `https://kagelot.com/api/mcp` with your key in the `Authorization: Bearer` header. Cursor uses `.cursor/mcp.json`, Cline/Windsurf each have their own MCP settings — the server details are identical.
 
-### 4. Start directing
+### 5. Start directing
 Open the project in your agent and say:
 > **"kage guide, get me started"**
 
